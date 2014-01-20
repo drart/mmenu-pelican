@@ -6,6 +6,7 @@
         {# CSS #}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/jquery.mmenu.all.css" type="text/css" />
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/tipsy.css" type="text/css" />
         {# RSS #}
         <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
         {% if FEED_RSS %}
@@ -14,14 +15,14 @@
         {# Javascript #}
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.mmenu.min.all.js"></script>
+        <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.tipsy.js"></script>
         <script type="text/javascript">
             $(function() {
                 $('#menu').mmenu({
-                    counters: true,
                     dragOpen: true,
+					slidingSubmenus: false,
                 });
             });
         </script>
@@ -31,38 +32,62 @@
 </head>
 
 <body>
-    <div>
-
+    <div id="page">
         <div id="header">
-            <a href="#menu"></a>
-            Examples
+            <a href="#menu"></a> Menu
         </div>
         <nav id="menu">
         <ul>
             {% for page in PAGES %}
-            <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a>{% if not loop.last %} ::{% endif %}</li>
+            <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+            {#{% if not loop.last %} ::{% endif %}#}
             {% endfor %}
             {% if categories|length > 1 %}
-            <li>:: <a href="{{ SITEURL }}/categories.html">Categories</a></li>
+            <li><a href="{{ SITEURL }}/categories.html">Categories</a>
+                <ul>
+                {% for category, articles in categories %}
+                <li><a href="{{ SITEURL }}/{{category.url}}">{{ category }}</a></li>
+                {% endfor %}
+                </ul>
+            </li>
             {% endif %}
         </ul>
         </nav>
 
-        <div id="social">
-            {% for name, link in SOCIAL %}
-                <a href="{{ link }}"><img href="{{ SITEURL }}/theme/images/{{ name }}.png"></a>
-            {% endfor %}
-        </div>
-        
+        <div id="content"> 
         {% block content %}
         {% endblock %}
 
+        <div id="social">
+            {% for name, link in SOCIAL %}
+                <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name }}" title="{{ name }}" class="tipster"></a>
+            {% endfor %}
+        </div>
+        
+            <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
+        </div>
     </div>
-    <footer>
-                Powered by <a href="http://getpelican.com/">Pelican</a>
-    </footer>
 
+<script>
+$(document).ready(function(){
+$('.first').click(function(){
+    $('#opener').toggle();
+});
+$('#upcoming').click(function() {
+    $('#events').fadeToggle('slow');
+});
+$('#past').click(function() {
+    $('#pastevents').fadeToggle('slow')	
+});
+$('#cv').click(function() {
+    $('#bio').fadeToggle('slow')
+});
 
+$(function() {$('#myCanvas').hide().fadeIn(5000);});
+
+$('.tipster').tipsy({gravity:'n',fade: true, delayIn:750});	
+});
+</script>
 {% include 'analytics.html' %}
 {% block jsfoot %}
 {% endblock %}

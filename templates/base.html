@@ -5,8 +5,6 @@
         <meta charset="utf-8" />
         {# CSS #}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/jquery.mmenu.all.css" type="text/css" />
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/tipsy.css" type="text/css" />
         {# RSS #}
         <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
         {% if FEED_RSS %}
@@ -15,18 +13,27 @@
         {# Javascript #}
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.mmenu.min.all.js"></script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.tipsy.js"></script>
         <script type="text/javascript">
             $(function() {
                 $('#menu').mmenu({
                     dragOpen: true,
-					slidingSubmenus: false,
+                    zposition : 'next',
+					classes		: 'mm-light',
+					counters	: true,
+					labels		: {
+						fixed		: !$.mmenu.support.touch
+					},
+					header		: {
+						add			: true,
+						update		: true,
+                        title		: '{{ SITENAME }}'
+					}
                 });
             });
         </script>
-
         {% block jshead %}
         {% endblock %}
 </head>
@@ -34,7 +41,12 @@
 <body>
     <div id="page">
         <div id="header">
-            <a href="#menu"></a> Menu
+            <a id="menuimg" href="#menu"></a> <div id="menutext">Menu</div>
+            {#
+                {% for name, link in SOCIAL %}
+                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name|capitalize  }}" title="{{ name|capitalize  }}" class="tipster"></a>
+                {% endfor %}
+            #}
         </div>
         <nav id="menu">
         <ul>
@@ -42,11 +54,23 @@
             <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
             {#{% if not loop.last %} ::{% endif %}#}
             {% endfor %}
-            {% if categories|length > 1 %}
-            <li><a href="{{ SITEURL }}/categories.html">Categories</a>
+            {% if WORKLINKS | length > 1 %}
+            <li class="Label">{{ WORKTITLE }}</li>
+            {% for name, link in WORKLINKS %}
+            <li><a href="{{ link }}">{{ name }}</a></li>
+            {% endfor %}
+            {% endif %}
+            {% if categories | length > 1 %}
+            <li class="Label"><a href="{{ SITEURL }}/{{ ARTICLE_DIR }}">Blog</a></li>
+            <li><a href="{{ SITEURL }}/{{ categories.url  }}">Categories</a>
                 <ul>
                 {% for category, articles in categories %}
                 <li><a href="{{ SITEURL }}/{{category.url}}">{{ category }}</a></li>
+                {# <ul>   
+                {% for article in articles  %}
+                <li><a href="{{SITEURL}}/{{article.url}}">{{ article.title }}</a></li>
+                {% endfor %}
+                </ul> #}
                 {% endfor %}
                 </ul>
             </li>
@@ -55,21 +79,31 @@
         </nav>
 
         <div id="content"> 
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
 
-        <div id="social">
-            {% for name, link in SOCIAL %}
-                <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name }}" title="{{ name }}" class="tipster"></a>
-            {% endfor %}
-        </div>
-        
+            <div id="social">
+                {% for name, link in SOCIAL %}
+                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name|capitalize  }}" title="{{ name|capitalize  }}" class="tipster"></a>
+                {% endfor %}
+            </div>
             <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
         </div>
     </div>
 
 <script>
 $(document).ready(function(){
+
+    $('#menutext').hide(); 
+    $('#menuimg').hover(
+        function(){
+            $('#menutext').fadeIn(200); 
+        },
+        function(){
+            $('#menutext').fadeOut(200); 
+        }
+    );
+
 $('.first').click(function(){
     $('#opener').toggle();
 });
@@ -86,6 +120,7 @@ $('#cv').click(function() {
 $(function() {$('#myCanvas').hide().fadeIn(5000);});
 
 $('.tipster').tipsy({gravity:'n',fade: true, delayIn:750});	
+
 });
 </script>
 {% include 'analytics.html' %}

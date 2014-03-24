@@ -11,4 +11,14 @@
 
 {% block jsfoot %}
 <script type="text/javascript" src="/theme/js/anim.js"> </script>
+{#  -- stratus seems to require 1.8
+<script type="text/javascript" src="http://stratus.sc/stratus.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $.stratus({
+        links: 'http://soundcloud.com/foofighters/sets/wasting-light'
+    });
+});
+</script>
+#}
 {% endblock %}

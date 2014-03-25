@@ -1,16 +1,41 @@
 {% extends "base.html" %}
 {% block content_title %}{% endblock %}
 {% block content %}        
-<canvas id="myCanvas"> </canvas>
+<canvas id="myCanvas"></canvas>
+    {#
+    <header>
+        <h1><a href="{{ SITEURL }}" id="page-title">{{ SITENAME }}</a></h1>
+        <span id="sitename"><a href="{{ SITEURL }}" id="site-title">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a> &sdot;</span>
+    </header>
+    #}
+    {% for article in articles_page.object_list %}
+            <h1 class="title">
+                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title }}">{{ article.title }}</a>
+            </h1>
+            <div class="published" title="{{ article.date.isoformat() }}">Posted in {{ article.category }} on {{ article.locale_date }}</div>
+        <div class="entry-content"> {{ article.content}} </div>
+    {% endfor %}
+    <hr style="margin:20px">
+    {% if DEFAULT_PAGINATION %}
+    <p class="paginator">
+        {% if articles_page.has_previous() %}
+            {% if articles_page.previous_page_number() == 1 %}
+        <a href="{{ SITEURL }}/{{ page_name }}.html">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            {% else %}
+            <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.previous_page_number() }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            {% endif %}
+            ::
+        {% endif %}
+        {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        {% endif %}
+    </p>
+    {% endif %}
 
-            <header>
-                <h1><a href="{{ SITEURL }}" id="page-title">{{ SITENAME }}</a></h1>
-                <span id="sitename"><a href="{{ SITEURL }}" id="site-title">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a> &sdot;</span>
-            </header>
 {% endblock content %}
 
 {% block jsfoot %}
-<script type="text/javascript" src="/theme/js/anim.js"> </script>
+{#<script type="text/javascript" src="/theme/js/anim.js"> </script> #}
 {#  -- stratus seems to require 1.8
 <script type="text/javascript" src="http://stratus.sc/stratus.js"></script>
 <script type="text/javascript">
@@ -21,4 +46,4 @@ $(document).ready(function(){
 });
 </script>
 #}
-{% endblock %}
+{% endblock jsfoot %}

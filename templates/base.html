@@ -3,6 +3,7 @@
 <head>
         <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
         <meta charset="utf-8" />
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
         {# CSS #}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
         {# RSS #}
@@ -87,8 +88,9 @@
                     <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name|capitalize  }}" title="{{ name|capitalize  }}" class="tipster"></a>
                 {% endfor %}
             </div>
-            <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
+
         </div>
+            <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
     </div>
 
 <script>
@@ -119,7 +121,7 @@ $('#cv').click(function() {
 
 $(function() {$('#myCanvas').hide().fadeIn(5000);});
 
-$('.tipster').tipsy({gravity:'n',fade: true, delayIn:750});	
+$('.tipster').tipsy({gravity:'n',fade: true, delayIn:500});	
 
 });
 </script>

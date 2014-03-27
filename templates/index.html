@@ -1,5 +1,11 @@
 {% extends "base.html" %}
+
 {% block content_title %}{% endblock %}
+
+{% block titletext %}
+<div id="sitename">{% if BLOGTITLE %}{{ BLOGTITLE }}{% else %}{{ SITETITLE }}{% endif %} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</div> 
+{% endblock %}
+
 {% block content %}        
 <canvas id="myCanvas"></canvas>
     {#
@@ -17,6 +23,7 @@
     {% endfor %}
     <hr style="margin:20px">
     {% if DEFAULT_PAGINATION %}
+    {% if articles_page.has_previous() or articles_page.has_next() %}
     <p class="paginator">
         {% if articles_page.has_previous() %}
             {% if articles_page.previous_page_number() == 1 %}
@@ -30,6 +37,7 @@
         <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
         {% endif %}
     </p>
+    {% endif %}
     {% endif %}
 
 {% endblock content %}

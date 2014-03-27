@@ -43,12 +43,9 @@
     <div id="page">
         <div id="header">
             <a id="menuimg" href="#menu"></a> <div id="menutext">Menu</div>
-            {#
-                {% for name, link in SOCIAL %}
-                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name|capitalize  }}" title="{{ name|capitalize  }}" class="tipster"></a>
-                {% endfor %}
-            #}
         </div>
+       {% block titletext %}
+       {% endblock titletext %}
         <nav id="menu">
         <ul>
             {% if MENUITEMS %}
@@ -70,17 +67,18 @@
             <li><a href="{{ link }}">{{ name }}</a></li>
             {% endfor %}
             {% endif %}
-            {% if categories | length > 1 %}
+
+            {% if categories | length > 0 %}
             <li class="Label"><a href="{{ SITEURL }}/{{ ARTICLE_DIR }}">Blog</a></li>
             <li><span>Categories</span>
                 <ul>
                 {% for category, articles in categories %}
-                <li><a href="{{ SITEURL }}/{{category.url}}">{{ category }}</a></li>
-                {# <ul>   
+                <li><a href="{{ SITEURL }}/{{category.url}}">{{ category }}</a>
+                 <ul>   
                 {% for article in articles  %}
-                <li><a href="{{SITEURL}}/{{article.url}}">{{ article.title }}</a></li>
+                <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
                 {% endfor %}
-                </ul> #}
+                </ul> </li>
                 {% endfor %}
                 </ul>
             </li>
@@ -94,12 +92,12 @@
 
             <div id="social">
                 {% for name, link in SOCIAL %}
-                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name| replace ('googlescholar','google Scholar')|capitalize  }}" title="{{ name| replace ('googlescholar','google Scholar') | capitalize  }}" class="tipster"></a>
+                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}" title="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}" class="tipster"></a>
                 {% endfor %}
             </div>
 
         </div>
-            <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
+        <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
     </div>
 
 <script>

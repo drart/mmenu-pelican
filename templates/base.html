@@ -16,7 +16,6 @@
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.mmenu.min.all.js"></script>
-        <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.tipsy.js"></script>
         <script type="text/javascript">
             $(function() {
                 $('#menu').mmenu({
@@ -92,8 +91,9 @@
 
             <div id="social">
                 {% for name, link in SOCIAL %}
-                    <a class="social" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}" title="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}" class="tipster"></a>
+                    <a class="social" target="_blank" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}"  class="tipster"></a>
                 {% endfor %}
+                <div id="socialtext"></div>
             </div>
 
         </div>
@@ -113,6 +113,16 @@ $(document).ready(function(){
         }
     );
 
+    $('img.tipster').hover(
+        function() {
+            $('#socialtext').html( $(this).attr('alt') );
+            $('#socialtext').stop(true,true).fadeIn(500);
+        },    
+        function() {
+            $('#socialtext').fadeOut(1000);
+        }
+    );
+
 $('.first').click(function(){
     $('#opener').toggle();
 });
@@ -127,8 +137,6 @@ $('#cv').click(function() {
 });
 
 $(function() {$('#myCanvas').hide().fadeIn(5000);});
-
-$('.tipster').tipsy({gravity:'n',fade: true, delayIn:500});	
 
 });
 </script>

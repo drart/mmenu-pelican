@@ -20,22 +20,38 @@
 
     {% include 'disqus.html' %}
 
-    {% if DEFAULT_PAGINATION %}
-    {#% if articles_page.has_previous() or articles_page.has_next() %}
+
+    {#
+    <ul>
+        {% if article.prev_article %}
+        <li>
+        <a href="{{ SITEURL }}/{{ article.prev_article.url}}">
+            {{ article.prev_article.title }}
+        </a>
+        </li>
+        {% endif %}
+        {% if article.next_article %}
+        <li>
+        <a href="{{ SITEURL }}/{{ article.next_article.url}}">
+            {{ article.next_article.title }}
+        </a>
+        </li>
+        {% endif %}
+    </ul>
+    <ul>
+    #}
+
+    {# Neighbor plugin stuff  #}
+    {% if article.prev_article or article.next_article %}
     <hr style="margin:20px">
     <p class="paginator">
-        {% if articles_page.has_previous() %}
-            {% if articles_page.previous_page_number() == 1 %}
-        <a href="{{ SITEURL }}/{{ page_name }}.html">&larr;&nbsp;&nbsp;&nbsp;newer</a>
-            {% else %}
-            <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.previous_page_number() }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
-            {% endif %}
+        {% if article.prev_article %}
+            <a href="{{ SITEURL }}/{{ article.prev_article.url }}.html">&larr;&nbsp;&nbsp;&nbsp;newer</a>
             ::
         {% endif %}
-        {% if articles_page.has_next() %}
-        <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        {% if article.next_article %}
+        <a href="{{ SITEURL }}/{{ article.next_article.url }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
         {% endif %}
     </p>
-    {% endif %#}
     {% endif %}
 {% endblock %}

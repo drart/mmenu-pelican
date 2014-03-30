@@ -45,12 +45,12 @@
     {% if article.prev_article or article.next_article %}
     <hr style="margin:20px">
     <p class="paginator">
-        {% if article.prev_article %}
-            <a href="{{ SITEURL }}/{{ article.prev_article.url }}.html">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+        {% if article.next_article %}
+            <a href="{{ SITEURL }}/{{ article.next_article.url }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
             ::
         {% endif %}
-        {% if article.next_article %}
-        <a href="{{ SITEURL }}/{{ article.next_article.url }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        {% if article.prev_article %}
+        <a href="{{ SITEURL }}/{{ article.prev_article.url }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
         {% endif %}
     </p>
     {% endif %}

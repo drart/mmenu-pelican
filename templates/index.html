@@ -18,7 +18,7 @@
             <h1 class="title">
                 <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title }}">{{ article.title }}</a>
             </h1>
-            <div class="published" title="{{ article.date.isoformat() }}">Posted in {{ article.category }} on {{ article.locale_date }}</div>
+            <div class="published" title="{{ article.date.isoformat() }}">Posted in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a> on {{ article.locale_date }}</div>
         <div class="entry-content"> {{ article.content}} </div>
     {% endfor %}
     <hr style="margin:20px">
@@ -27,14 +27,14 @@
     <p class="paginator">
         {% if articles_page.has_previous() %}
             {% if articles_page.previous_page_number() == 1 %}
-        <a href="{{ SITEURL }}/{{ page_name }}.html">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+        <a href="{{ SITEURL }}/{{ page_name }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
             {% else %}
-            <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.previous_page_number() }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}page/{{ articles_page.previous_page_number() }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
             {% endif %}
             ::
         {% endif %}
         {% if articles_page.has_next() %}
-        <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
         {% endif %}
     </p>
     {% endif %}

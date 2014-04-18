@@ -33,27 +33,27 @@ function draw() {
 
 	context.beginPath();
 	for(i=0;i<canvas.width+4;i++)
-		context.lineTo( i,  canvasHeight/2 + canvasHeight/2* i/canvasWidth* Math.cos( phi/3 + 2 * Math.PI *  i/canvasWidth) ); 
+		context.lineTo( i,  canvasHeight/2 + canvasHeight/2* i/canvasWidth* Math.cos( phi/3 + 2 * Math.PI *  i/canvasWidth) + 0.5 ); 
 	context.stroke();
 
 	context.beginPath();
 	for(i=0;i<canvas.width+4;i++)
-		context.lineTo( i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi/2 + 2 * Math.PI *  i/canvas.width)  );  
+		context.lineTo( i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi/2 + 2 * Math.PI *  i/canvas.width) + 0.5  );  
 	context.stroke();
 
 	context.beginPath();
 	for(i=0;i<canvas.width+4;i++)
-		context.lineTo( canvas.width-i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi + 2 * Math.PI *  i/canvas.width * i/canvas.width)  );  
+		context.lineTo( canvas.width-i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi + 2 * Math.PI *  i/canvas.width * i/canvas.width) + 0.5  );  
     context.stroke();
 
 	context.beginPath();
 	for(i=0;i<canvas.width+4;i++)
-		context.lineTo(canvas.width-i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi/2 + 2 * Math.PI *  i/canvas.width * i/canvas.width)  );  
+		context.lineTo(canvas.width-i,  canvasHeight/2 + canvasHeight/2* i/canvas.width* Math.sin( phi/2 + 2 * Math.PI *  i/canvas.width * i/canvas.width) + 0.5 );  
     context.stroke();
 
 	context.beginPath();
 	for(i=0;i<canvas.width+4;i++)
-		context.lineTo(i,  canvasHeight/2 + canvasHeight/4* i/canvas.width* Math.sin( phi + 2 * Math.PI *  i/canvas.width * i/canvas.width)  );  
+		context.lineTo(i,  canvasHeight/2 + canvasHeight/4* i/canvas.width* Math.sin( phi + 2 * Math.PI *  i/canvas.width * i/canvas.width) + 0.5 );  
     context.stroke();
 
     phi += 0.02;

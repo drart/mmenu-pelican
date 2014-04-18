@@ -37,6 +37,8 @@ footer{ position: fixed; bottom: 3px; right: 30px; color: #999; font-size: 9px; 
 
 img { max-width: 100%; margin: 10px auto; display:block;}
 
+#activity li { font-style: italic; margin: 5px  auto;  list-style-type: none;}
+
 /*  MMENU COLLAPSED TO MAKE LOADING EASIER    */
 
 

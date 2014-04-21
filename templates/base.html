@@ -124,20 +124,14 @@ $(document).ready(function(){
         }
     );
 
-$('.first').click(function(){
-    $('#opener').toggle();
-});
-$('#upcoming').click(function() {
-    $('#events').fadeToggle('slow');
-});
-$('#past').click(function() {
-    $('#pastevents').fadeToggle('slow')	
-});
-$('#cv').click(function() {
-    $('#bio').fadeToggle('slow')
-});
+    $('#upcoming').click(function() {
+        $('#futureevents').fadeToggle('slow');
+    });
+    $('#past').click(function() {
+        $('#pastevents').fadeToggle('slow')	
+    });
 
-$(function() {$('#myCanvas').hide().fadeIn(5000);});
+    $(function() {$('#myCanvas').hide().fadeIn(5000);});
 
 });
 </script>

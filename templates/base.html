@@ -16,6 +16,9 @@
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        {# Javascript fallback to local copy from stackoverflow  #}
+        <script>if (!window.jQuery) { document.write('<script src="/theme/js/jquery-2.0.0.min.js"><\/script>'); }
+            </script>
         <script type="text/javascript" src="{{ SITEURL }}/theme/js/jquery.mmenu.min.all.js"></script>
         <script type="text/javascript">
             $(function() {

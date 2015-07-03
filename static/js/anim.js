@@ -2,16 +2,18 @@ var canvas  = document.getElementById("myCanvas");
 
 var i = 0;
 var phi = 0.0;
-var sin1 = new Array(1024); //precompute buffer
 
 function animate() {
-	reqAnimFrame = window.mozRequestAnimationFrame    ||
+	reqAnimFrame = window.requestAnimationFrame;
+    if (!reqAnimFrame){
+        reqAnimFrame = window.mozRequestAnimationFrame    ||
 		window.webkitRequestAnimationFrame ||
 		window.msRequestAnimationFrame     ||
-		window.oRequestAnimationFrame
-		;	
+		window.oRequestAnimationFrame ;	
+    }
+    
 	setTimeout(function(){
-	reqAnimFrame(animate);
+        reqAnimFrame(animate);
    	}, 1000 / 25);
 
 	draw();
@@ -20,14 +22,13 @@ function animate() {
 function draw() {
 	canvas.height = window.innerHeight;
 	canvas.width= window.innerWidth;
-    	var canvasHeight = window.innerHeight;
+
+    var canvasHeight = window.innerHeight;
 	var canvasWidth = window.innerWidth;
 	var context = canvas.getContext("2d");
-	var i =0;
 
-	//for (i = 0; i < 1024; i++)
-	//	sin1[i] = i/canvasWidth * Math.sin(2 * Math.PI *  i / canvasWidth);
-	//context.clearRect(0, 0, canvasWidth, canvasHeight);
+	var i = 0;
+
 	context.lineWidth=0.3;
 	context.strokeStyle="#64";
 

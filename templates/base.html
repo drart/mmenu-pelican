@@ -70,7 +70,7 @@
             <li><a href="{{ link }}">{{ name }}</a></li>
             {% endfor %}
             {% endif %}
-
+            
             {% if categories | length > 0 %}
             <li class="Label"><a href="{{ SITEURL }}/{{ BLOGDIR }}">Blog</a></li>
             <li><span>Categories</span>
@@ -135,7 +135,7 @@ $(document).ready(function(){
     });
 
     $(function() {$('#myCanvas').hide().fadeIn(5000);});
-
+    $("#futureevents").hide(); 
 });
 </script>
 {% include 'analytics.html' %}
